@@ -1,9 +1,24 @@
- {
-        public List<Student> Students { get; set; } = new List<Student>();
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity; 
 
-        public void SaveChanges() 
+namespace FinalAssignmentEF
+{
+    public class Student
+    {
+        [Key]
+        public int StudentId { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+    }
+
+    public class SchoolContext : DbContext
+    {
+        public DbSet<Student> Students { get; set; }
+
+        public SchoolContext() : base("name=SchoolDbConnectionString")
         {
-            Console.WriteLine("Changes saved successfully to database!");
         }
     }
 
@@ -11,22 +26,97 @@
     {
         public static void Main()
         {
-            Console.WriteLine("--- Entity Framework Code-First Active ---");
-            Console.WriteLine("Inserting a new student record...");
-
-            var context = new SchoolContext();
-
-            // Adding a new test student record to ensure functionality
-            var student = new Student { StudentId = 1, Name = "Mohammad", Email = "mohammad@example.com" };
-            context.Students.Add(student);
-            context.SaveChanges();
-
-            Console.WriteLine("\n--- Fetching Results from Database ---");
-            
-            // Displaying the records in the Console output
-            foreach (var s in context.Students)
+            using (var context = new SchoolContext())
             {
-                Console.WriteLine($"Student ID: {s.StudentId} | Name: {s.Name} | Email: {s.Email}");
+                Console.WriteLine("--- Entity Framework 6 Active ---");
+                Console.WriteLine("Inserting a new student record...");
+
+                var student = new Student { Name = "Mohammad", Email = "mohammad@example.com" };
+                context.Students.Add(student);
+                
+                Console.WriteLine("Student record added to context successfully!");
+            }
+        }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity; 
+
+namespace FinalAssignmentEF
+{
+    public class Student
+    {
+        [Key]
+        public int StudentId { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+    }
+
+    public class SchoolContext : DbContext
+    {
+        public DbSet<Student> Students { get; set; }
+
+        public SchoolContext() : base("name=SchoolDbConnectionString")
+        {
+        }
+    }
+
+    public class Program
+    {
+        public static void Main()
+        {
+            using (var context = new SchoolContext())
+            {
+                Console.WriteLine("--- Entity Framework 6 Active ---");
+                Console.WriteLine("Inserting a new student record...");
+
+                var student = new Student { Name = "Mohammad", Email = "mohammad@example.com" };
+                context.Students.Add(student);
+                
+                Console.WriteLine("Student record added to context successfully!");
+            }
+        }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity; 
+
+namespace FinalAssignmentEF
+{
+    public class Student
+    {
+        [Key]
+        public int StudentId { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+    }
+
+    public class SchoolContext : DbContext
+    {
+        public DbSet<Student> Students { get; set; }
+
+        public SchoolContext() : base("name=SchoolDbConnectionString")
+        {
+        }
+    }
+
+    public class Program
+    {
+        public static void Main()
+        {
+            using (var context = new SchoolContext())
+            {
+                Console.WriteLine("--- Entity Framework 6 Active ---");
+                Console.WriteLine("Inserting a new student record...");
+
+                var student = new Student { Name = "Mohammad", Email = "mohammad@example.com" };
+                context.Students.Add(student);
+                
+                Console.WriteLine("Student record added to context successfully!");
             }
         }
     }
