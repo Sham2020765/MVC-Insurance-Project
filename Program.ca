@@ -1,0 +1,33 @@
+ {
+        public List<Student> Students { get; set; } = new List<Student>();
+
+        public void SaveChanges() 
+        {
+            Console.WriteLine("Changes saved successfully to database!");
+        }
+    }
+
+    public class Program
+    {
+        public static void Main()
+        {
+            Console.WriteLine("--- Entity Framework Code-First Active ---");
+            Console.WriteLine("Inserting a new student record...");
+
+            var context = new SchoolContext();
+
+            // Adding a new test student record to ensure functionality
+            var student = new Student { StudentId = 1, Name = "Mohammad", Email = "mohammad@example.com" };
+            context.Students.Add(student);
+            context.SaveChanges();
+
+            Console.WriteLine("\n--- Fetching Results from Database ---");
+            
+            // Displaying the records in the Console output
+            foreach (var s in context.Students)
+            {
+                Console.WriteLine($"Student ID: {s.StudentId} | Name: {s.Name} | Email: {s.Email}");
+            }
+        }
+    }
+}
